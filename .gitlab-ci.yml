@@ -11,7 +11,7 @@ default:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
 
 build frontend:
-  image: node:24-alpine
+  image: node:26-alpine
   stage: build frontend
   before_script: []
   variables:
@@ -21,6 +21,7 @@ build frontend:
     - maubot/management/frontend/node_modules
   script:
   - cd maubot/management/frontend
+  - npm i -g yarn
   - yarn --prod
   - yarn build
   - mv build ../../../frontend
